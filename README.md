@@ -32,7 +32,7 @@ npm i rpc-websocket-client
     const rpc = new RpcWebSocketClient();
 
     await rpc.connect('ws://localhost:4000/');
-     // connection established
+    // connection established
 
     // let's hope there will be no error or it will be catched in some wrapper
     await rpc.call(`auth.login`, ['rpcMaster', 'mySecretPassword']);
