@@ -1,6 +1,6 @@
 <p align="center">
     <a href="https://github.com/radarsu/radarsu/" target="blank"><img src="https://github.com/radarsu/rpc-websocket-client/blob/master/assets/rpc-websocket-client-logo.png" alt="rpc-websocket-client" /></a><br/>
-    <strong>Fast JSON RPC 2.0 written in TypeScript</strong>
+    <strong>Fast JSON RPC 2.0 written in TypeScript.</strong>
 </p>
 
 <p align="center">
