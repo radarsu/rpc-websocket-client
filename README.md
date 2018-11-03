@@ -59,10 +59,19 @@ npm i rpc-websocket-client
 (async () => {
     // lets say you use WebSocket implementation for GraphQL Client -> Server communication
     // e.g. Apollo, and it's already connected
-    // but you want to handle Server -> Client communication with RPC
+    // but you want to handle some of the Server -> Client communication with RPC
 
     const ws = (apollo as any).client.wsImpl;
     const rpc = new RpcWebSocketClient();
+    rpc.onRequest((data) => {       // data is typeof RpcRequest
+        // controller-like stuff
+    });
+    
+    rpc.onNotification((data) => {  // data is typeof RpcNotification
+        // notification handling
+    });
+
+    // here goes magic for listening to already-connected socket
     rpc.changeSocket(ws);
     rpc.listenMessages();
 })();
