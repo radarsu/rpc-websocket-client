@@ -1,4 +1,5 @@
 import { v1 } from 'uuid';
+import { isError } from 'util';
 
 /* tslint:disable:no-var-requires */
 const fastJson = require('fast-json-stringify');
@@ -42,7 +43,7 @@ export interface RpcSuccessResponse extends RpcResponse {
     result: string;
 }
 
-export interface RpcError extends RpcResponse {
+export interface RpcError {
     code: number;
     message: string;
     data?: any;
@@ -61,7 +62,7 @@ export type RpcUnidentifiedMessage = RpcRequest | RpcNotification | RpcSuccessRe
 export class RpcWebSocketClient {
     private ws: WebSocket;
     private idAwaiter: {
-        [id: string]: () => void;
+        [id: string]: (data?: any) => void;
     } = {};
 
     private onOpenHandlers: RpcEventFunction[] = [];
@@ -164,7 +165,7 @@ export class RpcWebSocketClient {
                 }
 
                 // resolve awaiting function
-                this.idAwaiter[data.id]();
+                this.idAwaiter[data.id](data.result);
             } else if (this.isErrorResponse(data)) {
                 // error
                 for (const handler of this.onErrorResponse) {
@@ -172,7 +173,7 @@ export class RpcWebSocketClient {
                 }
 
                 // resolve awaiting function
-                this.idAwaiter[data.id]();
+                this.idAwaiter[data.id](data.error);
             }
         };
     }
@@ -201,12 +202,18 @@ export class RpcWebSocketClient {
             }
 
             // expect response
-            this.idAwaiter[data.id] = () => {
+            this.idAwaiter[data.id] = (responseData?: any) => {
                 // stop timeout
                 clearInterval(timeout);
                 // stop waiting for response
                 delete this.idAwaiter[data.id];
-                resolve();
+
+                if (this.isRpcError(responseData)) {
+                    reject(responseData);
+                    return;
+                }
+
+                resolve(responseData);
             };
 
             this.ws.send(fastJson(data));
@@ -380,18 +387,10 @@ export class RpcWebSocketClient {
     private isErrorResponse(data: RpcUnidentifiedMessage): data is RpcErrorResponse {
         return (data as any).error;
     }
+
+    private isRpcError(data: any): data is RpcError {
+        return typeof (data as any).code !== 'undefined';
+    }
 }
 
 export default RpcWebSocketClient;
-
-(async () => {
-    const rpc = new RpcWebSocketClient();
-    // rpc.changeSocket(ws);
-
-    // rpc.onMessage((e) => {
-    //     //
-    // });
-
-    await rpc.connect('ws://localhost:4000');
-
-})();
