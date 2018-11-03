@@ -53,3 +53,17 @@ npm i rpc-websocket-client
     rpc.notify(`btw.iHateYou`, [`over and out']);
 })();
 ```
+
+## Advanced Usage
+```ts
+(async () => {
+    // lets say you use WebSocket implementation for GraphQL Client -> Server communication
+    // e.g. Apollo, and it's already connected
+    // but you want to handle Server -> Client communication with RPC
+
+    const ws = (apollo as any).client.wsImpl;
+    const rpc = new RpcWebSocketClient();
+    rpc.changeSocket(ws);
+    rpc.listenMessages();
+})();
+```
