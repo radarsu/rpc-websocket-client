@@ -59,7 +59,9 @@ export interface RpcWebSocketConfig {
 export type RpcUnidentifiedMessage = RpcRequest | RpcNotification | RpcSuccessResponse | RpcErrorResponse;
 
 export class RpcWebSocketClient {
-    private ws: WebSocket;
+    // native websocket
+    public ws: WebSocket;
+
     private idAwaiter: {
         [id: string]: (data?: any) => void;
     } = {};
