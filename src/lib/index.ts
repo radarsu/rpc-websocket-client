@@ -1,5 +1,4 @@
 import { v1 } from 'uuid';
-import { isError } from 'util';
 
 /* tslint:disable:no-var-requires */
 const fastJson = require('fast-json-stringify');

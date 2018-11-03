@@ -31,25 +31,49 @@ npm i rpc-websocket-client
 (async () => {
     const rpc = new RpcWebSocketClient();
 
-    await rpc.connect('ws://localhost:4000/');
+    await rpc.connect(`ws://localhost:4000/`);
     // connection established
 
     // let's hope there will be no error or it will be catched in some wrapper
-    await rpc.call(`auth.login`, ['rpcMaster', 'mySecretPassword']);
+    await rpc.call(`auth.login`, [`rpcMaster`, `mySecretPassword`]);
 
     // now lets be pesimistic
-    await rpc.call(`auth.login`, ['rpcMaster', 'mySecretPassword']).then(() => {
+    await rpc.call(`auth.login`, [`rpcMaster`, `mySecretPassword`]).then(() => {
         // woohoo, user logged!
     }).catch((err) => {
 
         // err is typeof RpcError (code: number, message: string, data?: any)
         await rpc.call(`auth.signup`, {
-            login: 'rpcMaster',
-            password: 'mySecretPassword',
+            login: `rpcMaster`,
+            password: `mySecretPassword`,
         });
 
     });
 
-    rpc.notify(`btw.iHateYou`, [`over and out']);
+    rpc.notify(`btw.iHateYou`, [`over and out`]);
+})();
+```
+
+## Advanced Usage
+```ts
+(async () => {
+    // lets say you use WebSocket implementation for GraphQL Client -> Server communication
+    // e.g. Apollo, and it's already connected
+    // but you want to handle some of the Server -> Client communication with RPC
+
+    const ws = (apollo as any).client.wsImpl;
+    const rpc = new RpcWebSocketClient();
+
+    rpc.onRequest((data) => {       // data is typeof RpcRequest
+        // controller-like stuff
+    });
+
+    rpc.onNotification((data) => {  // data is typeof RpcNotification
+        // notification handling
+    });
+
+    // here goes magic for listening to already-connected socket
+    rpc.changeSocket(ws);
+    rpc.listenMessages();
 })();
 ```
