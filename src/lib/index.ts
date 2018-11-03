@@ -1,5 +1,9 @@
 import { v1 } from 'uuid';
 
+/* tslint:disable:no-var-requires */
+const fastJson = require('fast-json-stringify');
+/* tslint:enable */
+
 export type RpcEventFunction = (e: Event) => void;
 export type RpcMessageEventFunction = (e: MessageEvent) => void;
 export type RpcCloseEventFunction = (e: CloseEvent) => void;
@@ -205,7 +209,7 @@ export class RpcWebSocketClient {
                 resolve();
             };
 
-            this.ws.send(JSON.stringify(data));
+            this.ws.send(fastJson(data));
         });
     }
 
@@ -216,7 +220,7 @@ export class RpcWebSocketClient {
      * @memberof RpcWebSocketClient
      */
     public notify(method: string, params?: any) {
-        this.ws.send(JSON.stringify(this.buildNotification(method, params)));
+        this.ws.send(fastJson(this.buildNotification(method, params)));
     }
 
     // setup
