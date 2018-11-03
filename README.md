@@ -22,7 +22,7 @@ npm i rpc-websocket-client
 - <strong>TypeScript</strong> with documentation in comments.
 - <strong>Fast JSON parsing</strong> of incoming requests by <a href="https://github.com/fastify/fast-json-stringify" target="_blank" alt="fast-json-strongify">fast-json-strongify</a>.
 - <strong>Unique RPC identifiers</strong> by <a href="https://github.com/kelektiv/node-uuid" target="_blank" alt="uuid">uuid/v1</a>.
-- <strong>Lightweight</strong>. Allows you to call noRpc() method to prevent sending `jsonrpc: '2.0'` overhead from all messages if you'd like to ignore the <a href="https://www.jsonrpc.org/specification" target="_blank" alt="JSON RPC 2.0">JSON RPC 2.0</a> standard for better performance.
+- <strong>Lightweight</strong>. Allows you to call `noRpc()` method to prevent sending `jsonrpc: '2.0'` overhead from all messages if you'd like to ignore the <a href="https://www.jsonrpc.org/specification" target="_blank" alt="JSON RPC 2.0">JSON RPC 2.0</a> standard for better performance.
 - Option to <strong>connect RpcWebSocketClient with already existing WebSocket</strong> with `changeSocket()` and `listenMessages()` methods. Useful if you use <strong>REST or GraphQL implementation of another library</strong> and want to handle <a href="https://www.jsonrpc.org/specification" target="_blank" alt="JSON RPC 2.0">JSON RPC 2.0</a> when communicating from server to client (that was my use case to develop this package).
 
 ## Basic Usage
