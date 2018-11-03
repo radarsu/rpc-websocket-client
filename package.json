@@ -51,9 +51,11 @@
     "node": ">=8.9"
   },
   "dependencies": {
-    "sha.js": "^2.4.11"
+    "sha.js": "^2.4.11",
+    "uuid": "^3.3.2"
   },
   "devDependencies": {
+    "@types/uuid": "^3.4.4",
     "ava": "1.0.0-beta.7",
     "codecov": "^3.1.0",
     "cz-conventional-changelog": "^2.1.0",
