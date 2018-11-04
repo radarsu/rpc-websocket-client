@@ -7,6 +7,12 @@
 <a href="https://github.com/Microsoft/TypeScript" target="blank">TypeScript</a> <a href="https://www.jsonrpc.org/specification" target="_blank" alt="JSON RPC 2.0">JSON RPC 2.0</a> WebSocket implementation with async-await Promises.<br/>
 </p>
 
+<p align="center">
+	<img src="https://img.shields.io/github/license/radarsu/rpc-websocket-client.svg" />
+	<img src="https://img.shields.io/github/stars/radarsu/rpc-websocket-client.svg" />
+	<a href="https://twitter.com/radarsujs"><img src="https://img.shields.io/twitter/url/https/github.com/radarsu/rpc-websocket-client.svg?style=social" /></a>
+</p>
+
 ## Description
 
 I really lacked typescript support or type definitions of <a href="https://github.com/radarsu/rpc-websocket-client" target="_blank" alt="rpc-websockets">rpc-websockets</a>. I kept everything as simple as possible for <strong>best performance</strong> and used <a href="https://github.com/fastify/fast-json-stringify" target="_blank" alt="fast-json-strongify">fast-json-strongify</a> for much faster JSON communication. Under the hood id-generation for requests is done using <a href="https://github.com/kelektiv/node-uuid" target="_blank" alt="uuid">uuid/v1</a> to provide id uniqueness as an additional feature.
