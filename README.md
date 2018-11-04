@@ -8,6 +8,7 @@
 </p>
 
 <p align="center">
+	<a href="https://www.npmjs.com/package/rpc-websocket-client" target="_blank" alt="npm rpc-websocket-client"><img src="https://img.shields.io/npm/v/rpc-websocket-client.svg" alt="npm" /></a>
 	<img src="https://img.shields.io/github/license/radarsu/rpc-websocket-client.svg" />
 	<img src="https://img.shields.io/github/stars/radarsu/rpc-websocket-client.svg" />
 	<a href="https://twitter.com/radarsujs"><img src="https://img.shields.io/twitter/url/https/github.com/radarsu/rpc-websocket-client.svg?style=social" /></a>
