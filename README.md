@@ -1,5 +1,5 @@
 <p align="center">
-    <a href="https://github.com/radarsu/radarsu/" target="blank"><img src="https://raw.githubusercontent.com/radarsu/rpc-websocket-client/master/assets/rpc-websocket-client-logo.png" alt="rpc-websocket-client" /></a><br/>
+    <a href="https://github.com/radarsu/rpc-websocket-client/" target="blank"><img src="https://raw.githubusercontent.com/radarsu/rpc-websocket-client/master/assets/logo.png" alt="rpc-websocket-client" /></a><br/>
     <strong>Fast JSON RPC 2.0 written in TypeScript.</strong>
 </p>
 
@@ -23,11 +23,7 @@ npm i rpc-websocket-client
 - <strong>Fast JSON parsing</strong> of incoming requests by <a href="https://github.com/fastify/fast-json-stringify" target="_blank" alt="fast-json-strongify">fast-json-strongify</a>.
 - <strong>Unique RPC identifiers</strong> by <a href="https://github.com/kelektiv/node-uuid" target="_blank" alt="uuid">uuid/v1</a>.
 - <strong>Lightweight</strong>. Allows you to call `noRpc()` method to prevent sending `jsonrpc: '2.0'` overhead from all messages if you'd like to ignore the <a href="https://www.jsonrpc.org/specification" target="_blank" alt="JSON RPC 2.0">JSON RPC 2.0</a> standard for better performance.
-<<<<<<< HEAD
-- Option to <strong>connect RpcWebSocketClient with already existing WebSocket</strong> with `changeSocket()` and `listenMessages()` methods. Useful if you use <strong>REST or GraphQL implementation of another library</strong> and want to handle <a href="https://www.jsonrpc.org/specification" target="_blank" alt="JSON RPC 2.0">JSON RPC 2.0</a> when communicating from server to client (that was my use case to develop this package).
-=======
 - Option to <strong>connect RpcWebSocketClient with already existing WebSocket</strong> with `changeSocket()` and `listenMessages()` methods. Useful if you use <strong>REST</strong> or <strong>GraphQL implementation</strong> from another library and want to handle <a href="https://www.jsonrpc.org/specification" target="_blank" alt="JSON RPC 2.0">JSON RPC 2.0</a> when communicating from server to client (that was my use case to develop this package).
->>>>>>> 2e3d23fcc7b8fa36a855a1f4d8f4498a6b418d54
 
 ## Basic Usage
 ```ts
