@@ -9,7 +9,7 @@
 
 ## Description
 
-I really lacked typescript support or type definitions of <a href="https://github.com/radarsu/rpc-websocket-client" target="_blank" alt="rpc-websockets">rpc-websockets</a>. I kept everything as simple as possible for <strong>best performance</strong> and used <a href="https://github.com/fastify/fast-json-stringify" target="_blank" alt="fast-json-strongify">fast-json-strongify</a> for much faster JSON communication. Under the hood id-generation for requests and notifications is done using <a href="https://github.com/kelektiv/node-uuid" target="_blank" alt="uuid">uuid/v1</a> to provide id uniqueness as an additional feature.
+I really lacked typescript support or type definitions of <a href="https://github.com/radarsu/rpc-websocket-client" target="_blank" alt="rpc-websockets">rpc-websockets</a>. I kept everything as simple as possible for <strong>best performance</strong> and used <a href="https://github.com/fastify/fast-json-stringify" target="_blank" alt="fast-json-strongify">fast-json-strongify</a> for much faster JSON communication. Under the hood id-generation for requests is done using <a href="https://github.com/kelektiv/node-uuid" target="_blank" alt="uuid">uuid/v1</a> to provide id uniqueness as an additional feature.
 
 ## Installation
 

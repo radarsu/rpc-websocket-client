@@ -25,7 +25,6 @@
     "fix:tslint": "tslint --fix --project .",
     "fix": "run-s fix:*",
     "info": "npm-scripts-info",
-    "publish": "npm run build && git add . && git commit -m 'fix' && git push && npm publish",
     "reset": "git clean -dfx && git reset --hard && npm i",
     "test:lint": "tslint --project . && prettier \"src/**/*.ts\" --list-different",
     "test:unit": "nyc --silent ava",
