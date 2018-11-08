@@ -7,56 +7,57 @@ const fastJson = require('fast-json-stringify');
 export type RpcEventFunction = (e: Event) => void;
 export type RpcMessageEventFunction = (e: MessageEvent) => void;
 export type RpcCloseEventFunction = (e: CloseEvent) => void;
-export type RpcId = string | number;
 
-export type RpcNotificationEvent = (data: RpcNotification) => void;
-export type RpcRequestEvent = (data: RpcRequest) => void;
-export type RpcSuccessResponseEvent = (data: RpcSuccessResponse) => void;
-export type RpcErrorResponseEvent = (data: RpcErrorResponse) => void;
+export type RpcNotificationEvent = (data: IRpcNotification) => void;
+export type RpcRequestEvent = (data: IRpcRequest) => void;
+export type RpcSuccessResponseEvent = (data: IRpcSuccessResponse) => void;
+export type RpcErrorResponseEvent = (data: IRpcErrorResponse) => void;
 
 export enum RpcVersions {
     RPC_VERSION = '2.0',
 }
 
-export interface RpcData {
+export type RpcId = string | number;
+
+export interface IRpcData {
     method: string;
     params?: any;
 }
 
-export interface RpcNotification extends RpcData {
+export interface IRpcNotification extends IRpcData {
     jsonrpc: RpcVersions.RPC_VERSION;
 }
 
-export interface RpcRequest extends RpcNotification {
+export interface IRpcRequest extends IRpcNotification {
     // if not included its notification
     id: RpcId;
 }
 
-export interface RpcResponse {
+export interface IRpcResponse {
     id: RpcId;
     jsonrpc: RpcVersions.RPC_VERSION;
 }
 
-export interface RpcSuccessResponse extends RpcResponse {
+export interface IRpcSuccessResponse extends IRpcResponse {
     // if not included its notification
-    result: string;
+    result: any;
 }
 
-export interface RpcError {
+export interface IRpcError {
     code: number;
     message: string;
     data?: any;
 }
 
-export interface RpcErrorResponse extends RpcResponse {
-    error: RpcError;
+export interface IRpcErrorResponse extends IRpcResponse {
+    error: IRpcError;
 }
 
-export interface RpcWebSocketConfig {
+export interface IRpcWebSocketConfig {
     responseTimeout: number;
 }
 
-export type RpcUnidentifiedMessage = RpcRequest | RpcNotification | RpcSuccessResponse | RpcErrorResponse;
+export type RpcUnidentifiedMessage = IRpcRequest | IRpcNotification | IRpcSuccessResponse | IRpcErrorResponse;
 
 export class RpcWebSocketClient {
     // native websocket
@@ -304,14 +305,14 @@ export class RpcWebSocketClient {
     }
 
     // request
-    private buildRequest(method: string, params?: any): RpcRequest {
+    private buildRequest(method: string, params?: any): IRpcRequest {
         const data = this.buildRequestBase(method, params);
         data.jsonrpc = RpcVersions.RPC_VERSION;
         return data;
     }
 
-    private buildRequestBase(method: string, params?: any): RpcRequest {
-        const data: RpcRequest = {} as any;
+    private buildRequestBase(method: string, params?: any): IRpcRequest {
+        const data: IRpcRequest = {} as any;
         data.id = this.idFn();
         data.method = method;
 
@@ -323,14 +324,14 @@ export class RpcWebSocketClient {
     }
 
     // notification
-    private buildNotification(method: string, params?: any): RpcNotification {
+    private buildNotification(method: string, params?: any): IRpcNotification {
         const data = this.buildNotificationBase(method, params);
         data.jsonrpc = RpcVersions.RPC_VERSION;
         return data;
     }
 
-    private buildNotificationBase(method: string, params?: any): RpcNotification {
-        const data: RpcNotification = {} as any;
+    private buildNotificationBase(method: string, params?: any): IRpcNotification {
+        const data: IRpcNotification = {} as any;
         data.method = method;
 
         if (params) {
@@ -341,28 +342,28 @@ export class RpcWebSocketClient {
     }
 
     // success response
-    private buildRpcSuccessResponse(id: RpcId, result: any): RpcSuccessResponse {
+    private buildRpcSuccessResponse(id: RpcId, result: any): IRpcSuccessResponse {
         const data = this.buildRpcSuccessResponseBase(id, result);
         data.jsonrpc = RpcVersions.RPC_VERSION;
         return data;
     }
 
-    private buildRpcSuccessResponseBase(id: RpcId, result: any): RpcSuccessResponse {
-        const data: RpcSuccessResponse = {} as any;
+    private buildRpcSuccessResponseBase(id: RpcId, result: any): IRpcSuccessResponse {
+        const data: IRpcSuccessResponse = {} as any;
         data.id = id;
         data.result = result;
         return data;
     }
 
     // error response
-    private buildRpcErrorResponse(id: RpcId, error: RpcError): RpcErrorResponse {
+    private buildRpcErrorResponse(id: RpcId, error: IRpcError): IRpcErrorResponse {
         const data = this.buildRpcErrorResponseBase(id, error);
         data.jsonrpc = RpcVersions.RPC_VERSION;
         return data;
     }
 
-    private buildRpcErrorResponseBase(id: RpcId, error: RpcError): RpcErrorResponse {
-        const data: RpcErrorResponse = {} as any;
+    private buildRpcErrorResponseBase(id: RpcId, error: IRpcError): IRpcErrorResponse {
+        const data: IRpcErrorResponse = {} as any;
         data.id = id;
         data.error = error;
         return data;
@@ -373,23 +374,23 @@ export class RpcWebSocketClient {
     }
 
     // tests
-    private isNotification(data: RpcUnidentifiedMessage): data is RpcNotification {
+    private isNotification(data: RpcUnidentifiedMessage): data is IRpcNotification {
         return !(data as any).id;
     }
 
-    private isRequest(data: RpcUnidentifiedMessage): data is RpcRequest {
+    private isRequest(data: RpcUnidentifiedMessage): data is IRpcRequest {
         return (data as any).method;
     }
 
-    private isSuccessResponse(data: RpcUnidentifiedMessage): data is RpcSuccessResponse {
+    private isSuccessResponse(data: RpcUnidentifiedMessage): data is IRpcSuccessResponse {
         return (data as any).result;
     }
 
-    private isErrorResponse(data: RpcUnidentifiedMessage): data is RpcErrorResponse {
+    private isErrorResponse(data: RpcUnidentifiedMessage): data is IRpcErrorResponse {
         return (data as any).error;
     }
 
-    private isRpcError(data: any): data is RpcError {
+    private isRpcError(data: any): data is IRpcError {
         return typeof (data as any).code !== 'undefined';
     }
 }
