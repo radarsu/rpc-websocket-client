@@ -383,11 +383,11 @@ export class RpcWebSocketClient {
     }
 
     private isSuccessResponse(data: RpcUnidentifiedMessage): data is IRpcSuccessResponse {
-        return (data as any).result;
+        return data.hasOwnProperty(`result`);
     }
 
     private isErrorResponse(data: RpcUnidentifiedMessage): data is IRpcErrorResponse {
-        return (data as any).error;
+        return data.hasOwnProperty(`error`);
     }
 
     private isRpcError(data: any): data is IRpcError {
