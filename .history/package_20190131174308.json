@@ -1,6 +1,6 @@
 {
   "name": "rpc-websocket-client",
-  "version": "1.0.2",
+  "version": "1.0.1",
   "description": "Fast JSON RPC 2.0 written in TypeScript.",
   "main": "build/main/index.js",
   "typings": "build/main/index.d.ts",

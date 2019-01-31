@@ -78,7 +78,7 @@ export class RpcWebSocketClient {
     private onErrorHandlers: RpcEventFunction[] = [];
     private onCloseHandlers: RpcCloseEventFunction[] = [];
 
-    private config: IRpcWebSocketConfig = {
+    private config: RpcWebSocketConfig = {
         responseTimeout: 10000,
     };
 
@@ -134,7 +134,7 @@ export class RpcWebSocketClient {
      * @memberof RpcWebSocketClient
      */
     public listenMessages() {
-        let previousOnMessage: RpcMessageEventFunction | undefined;
+        let previousOnMessage: RpcEventFunction | undefined;
         if (this.ws.onmessage) {
             previousOnMessage = this.ws.onmessage.bind(this.ws);
         }
@@ -259,7 +259,7 @@ export class RpcWebSocketClient {
      * @param {RpcWebSocketConfig} options
      * @memberof RpcWebSocketClient
      */
-    public configure(options: IRpcWebSocketConfig) {
+    public configure(options: RpcWebSocketConfig) {
         Object.assign(this.config, options);
     }
 

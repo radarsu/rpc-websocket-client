@@ -134,7 +134,7 @@ export class RpcWebSocketClient {
      * @memberof RpcWebSocketClient
      */
     public listenMessages() {
-        let previousOnMessage: RpcMessageEventFunction | undefined;
+        let previousOnMessage: RpcEventFunction | undefined;
         if (this.ws.onmessage) {
             previousOnMessage = this.ws.onmessage.bind(this.ws);
         }

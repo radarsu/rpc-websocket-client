@@ -4,7 +4,7 @@ import { v1 } from 'uuid';
 const fastJson = require('fast-json-stringify');
 /* tslint:enable */
 
-export type RpcEventFunction = (e: Event) => void;
+export type RpcEventFunction = (e: MessageEvent) => void;
 export type RpcMessageEventFunction = (e: MessageEvent) => void;
 export type RpcCloseEventFunction = (e: CloseEvent) => void;
 
@@ -134,7 +134,7 @@ export class RpcWebSocketClient {
      * @memberof RpcWebSocketClient
      */
     public listenMessages() {
-        let previousOnMessage: RpcMessageEventFunction | undefined;
+        let previousOnMessage: RpcEventFunction | undefined;
         if (this.ws.onmessage) {
             previousOnMessage = this.ws.onmessage.bind(this.ws);
         }

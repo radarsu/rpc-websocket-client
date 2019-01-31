@@ -1,43 +1,43 @@
 export declare type RpcEventFunction = (e: Event) => void;
 export declare type RpcMessageEventFunction = (e: MessageEvent) => void;
 export declare type RpcCloseEventFunction = (e: CloseEvent) => void;
-export declare type RpcId = string | number;
-export declare type RpcNotificationEvent = (data: RpcNotification) => void;
-export declare type RpcRequestEvent = (data: RpcRequest) => void;
-export declare type RpcSuccessResponseEvent = (data: RpcSuccessResponse) => void;
-export declare type RpcErrorResponseEvent = (data: RpcErrorResponse) => void;
+export declare type RpcNotificationEvent = (data: IRpcNotification) => void;
+export declare type RpcRequestEvent = (data: IRpcRequest) => void;
+export declare type RpcSuccessResponseEvent = (data: IRpcSuccessResponse) => void;
+export declare type RpcErrorResponseEvent = (data: IRpcErrorResponse) => void;
 export declare enum RpcVersions {
     RPC_VERSION = "2.0"
 }
-export interface RpcData {
+export declare type RpcId = string | number;
+export interface IRpcData {
     method: string;
     params?: any;
 }
-export interface RpcNotification extends RpcData {
+export interface IRpcNotification extends IRpcData {
     jsonrpc: RpcVersions.RPC_VERSION;
 }
-export interface RpcRequest extends RpcNotification {
+export interface IRpcRequest extends IRpcNotification {
     id: RpcId;
 }
-export interface RpcResponse {
+export interface IRpcResponse {
     id: RpcId;
     jsonrpc: RpcVersions.RPC_VERSION;
 }
-export interface RpcSuccessResponse extends RpcResponse {
-    result: string;
+export interface IRpcSuccessResponse extends IRpcResponse {
+    result: any;
 }
-export interface RpcError {
+export interface IRpcError {
     code: number;
     message: string;
     data?: any;
 }
-export interface RpcErrorResponse extends RpcResponse {
-    error: RpcError;
+export interface IRpcErrorResponse extends IRpcResponse {
+    error: IRpcError;
 }
-export interface RpcWebSocketConfig {
+export interface IRpcWebSocketConfig {
     responseTimeout: number;
 }
-export declare type RpcUnidentifiedMessage = RpcRequest | RpcNotification | RpcSuccessResponse | RpcErrorResponse;
+export declare type RpcUnidentifiedMessage = IRpcRequest | IRpcNotification | IRpcSuccessResponse | IRpcErrorResponse;
 export declare class RpcWebSocketClient {
     ws: WebSocket;
     private idAwaiter;
@@ -111,7 +111,7 @@ export declare class RpcWebSocketClient {
      * @param {RpcWebSocketConfig} options
      * @memberof RpcWebSocketClient
      */
-    configure(options: RpcWebSocketConfig): void;
+    configure(options: IRpcWebSocketConfig): void;
     /**
      * Allows you to change used native WebSocket client to another one.
      * If you have already-connected WebSocket, use this with listenMessages().
