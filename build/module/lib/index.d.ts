@@ -39,6 +39,9 @@ export interface IRpcWebSocketConfig {
 }
 export declare type RpcUnidentifiedMessage = IRpcRequest | IRpcNotification | IRpcSuccessResponse | IRpcErrorResponse;
 export declare class RpcWebSocketClient {
+    static config: {
+        wsImpl: any;
+    };
     ws: WebSocket;
     private idAwaiter;
     private onOpenHandlers;

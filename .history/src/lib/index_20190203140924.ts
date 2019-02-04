@@ -60,9 +60,7 @@ export interface IRpcWebSocketConfig {
 export type RpcUnidentifiedMessage = IRpcRequest | IRpcNotification | IRpcSuccessResponse | IRpcErrorResponse;
 
 export class RpcWebSocketClient {
-    public static config = {
-        wsImpl: WebSocket as any,
-    };
+    public static config = {};
 
     // native websocket
     public ws: WebSocket;
@@ -104,7 +102,7 @@ export class RpcWebSocketClient {
      * @memberof RpcWebSocketClient
      */
     public async connect(url: string, protocols?: string | string[]) {
-        this.ws = new RpcWebSocketClient.config.wsImpl(url, protocols);
+        this.ws = new WebSocket(url, protocols);
         await this.listen();
     }
 
