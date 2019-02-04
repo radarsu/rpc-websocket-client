@@ -7,4 +7,6 @@ coverage
 .nyc_output
 *.log
 
+.history
+
 yarn.lock
