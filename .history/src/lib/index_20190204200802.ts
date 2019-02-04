@@ -101,6 +101,10 @@ export class RpcWebSocketClient {
      * @memberof RpcWebSocketClient
      */
     public async connect(url: string, protocols?: string | string[]) {
+        if (!WebSocket) {
+            throw new Error(`For server side usage you need to override WebSocket creator function in RpcWebSocketClient.config.createWs(url, protocols).`);
+        }
+
         this.ws = new WsImpl(url, protocols);
         await this.listen();
     }

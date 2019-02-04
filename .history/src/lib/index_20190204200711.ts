@@ -61,6 +61,12 @@ export interface IRpcWebSocketConfig {
 export type RpcUnidentifiedMessage = IRpcRequest | IRpcNotification | IRpcSuccessResponse | IRpcErrorResponse;
 
 export class RpcWebSocketClient {
+    public static config = {
+        createWs(url: string, protocols?: string | string[]) {
+            return new WebSocket(url, protocols);
+        },
+    };
+
     // native websocket
     public ws: WebSocket;
 
@@ -101,7 +107,11 @@ export class RpcWebSocketClient {
      * @memberof RpcWebSocketClient
      */
     public async connect(url: string, protocols?: string | string[]) {
-        this.ws = new WsImpl(url, protocols);
+        if (!WebSocket) {
+            throw new Error(`For server side usage you need to override WebSocket creator function in RpcWebSocketClient.config.createWs(url, protocols).`);
+        }
+
+        this.ws = RpcWebSocketClient.config.createWs(url, protocols);
         await this.listen();
     }
 
