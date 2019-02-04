@@ -65,6 +65,8 @@ import { RpcWebSocketClient } from 'rpc-websocket-client';
 
 ## Advanced Usage
 ```ts
+import { RpcWebSocketClient } from 'rpc-websocket-client';
+
 (async () => {
     // lets say you use WebSocket implementation for GraphQL Client -> Server communication
     // e.g. Apollo, and it's already connected
