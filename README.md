@@ -66,16 +66,7 @@ import { RpcWebSocketClient } from 'rpc-websocket-client';
 ## Advanced Usage
 ```ts
 (async () => {
-
-    // if you need custom WebSocket implementation, required for server-side usage
-    // implementation must be compatibile with native WebSocket (take same arguments in constructor)
-    const customWsImpl = require('isomorphic-ws');
-
-    RpcWebSocketClient.config.createWs = (url: string, protocols?: string | string[]) => {
-        return new customWsImpl(url, protocols);
-    };
-
-    // let's say you use WebSocket implementation for GraphQL Client -> Server communication
+    // lets say you use WebSocket implementation for GraphQL Client -> Server communication
     // e.g. Apollo, and it's already connected
     // but you want to handle some of the Server -> Client communication with RPC
 
