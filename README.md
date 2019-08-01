@@ -75,11 +75,11 @@ import { RpcWebSocketClient } from 'rpc-websocket-client';
     const ws = (apollo as any).client.wsImpl;
     const rpc = new RpcWebSocketClient();
 
-    rpc.onRequest((data) => {       // data is typeof RpcRequest
+    rpc.onRequest.push((data) => {       // data is typeof RpcRequest
         // controller-like stuff
     });
 
-    rpc.onNotification((data) => {  // data is typeof RpcNotification
+    rpc.onNotification.push((data) => {  // data is typeof RpcNotification
         // notification handling
     });
 
