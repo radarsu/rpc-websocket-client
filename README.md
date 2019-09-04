@@ -16,7 +16,7 @@
 
 ## Description
 
-I really lacked typescript support or type definitions of <a href="https://github.com/elpheria/rpc-websockets" target="_blank" alt="rpc-websockets">rpc-websockets</a>. I kept everything as simple as possible for <strong>best performance</strong> and used <a href="https://github.com/fastify/fast-json-stringify" target="_blank" alt="fast-json-strongify">fast-json-strongify</a> for much faster JSON communication. Under the hood id-generation for requests is done using <a href="https://github.com/kelektiv/node-uuid" target="_blank" alt="uuid">uuid/v1</a> to provide id uniqueness as an additional feature.
+I really lacked typescript support or type definitions of <a href="https://github.com/elpheria/rpc-websockets" target="_blank" alt="rpc-websockets">rpc-websockets</a>. I kept everything as simple as possible for <strong>best performance</strong> and in principle <strong>stay close to the metal</strong>. Under the hood id-generation for requests is done using <a href="https://github.com/kelektiv/node-uuid" target="_blank" alt="uuid">uuid/v1</a> to provide id uniqueness as an additional feature.
 
 ## Installation
 
@@ -27,7 +27,6 @@ npm i rpc-websocket-client
 ## Features
 
 - <strong>TypeScript</strong> with documentation in comments.
-- <strong>Fast JSON parsing</strong> of incoming requests by <a href="https://github.com/fastify/fast-json-stringify" target="_blank" alt="fast-json-strongify">fast-json-strongify</a>.
 - <strong>Unique RPC identifiers</strong> by <a href="https://github.com/kelektiv/node-uuid" target="_blank" alt="uuid">uuid/v1</a>.
 - <strong>Lightweight</strong>. Allows you to call `noRpc()` method to prevent sending `jsonrpc: '2.0'` overhead from all messages if you'd like to ignore the <a href="https://www.jsonrpc.org/specification" target="_blank" alt="JSON RPC 2.0">JSON RPC 2.0</a> standard for better performance.
 - Option to <strong>connect RpcWebSocketClient with already existing WebSocket</strong> with `changeSocket()` and `listenMessages()` methods. Useful if you use <strong>REST</strong> or <strong>GraphQL implementation</strong> from another library and want to handle <a href="https://www.jsonrpc.org/specification" target="_blank" alt="JSON RPC 2.0">JSON RPC 2.0</a> when communicating from server to client (that was my use case to develop this package).
