@@ -73,18 +73,18 @@ export class RpcWebSocketClient {
         [id: string]: (data?: any) => void;
     } = {};
 
-    private onOpenHandlers: RpcEventFunction[] = [];
-    private onAnyMessageHandlers: RpcMessageEventFunction[] = [];
+    public onOpenHandlers: RpcEventFunction[] = [];
+    public onAnyMessageHandlers: RpcMessageEventFunction[] = [];
 
-    private onNotification: RpcNotificationEvent[] = [];
-    private onRequest: RpcRequestEvent[] = [];
-    private onSuccessResponse: RpcSuccessResponseEvent[] = [];
-    private onErrorResponse: RpcErrorResponseEvent[] = [];
+    public onNotification: RpcNotificationEvent[] = [];
+    public onRequest: RpcRequestEvent[] = [];
+    public onSuccessResponse: RpcSuccessResponseEvent[] = [];
+    public onErrorResponse: RpcErrorResponseEvent[] = [];
 
-    private onErrorHandlers: RpcEventFunction[] = [];
-    private onCloseHandlers: RpcCloseEventFunction[] = [];
+    public onErrorHandlers: RpcEventFunction[] = [];
+    public onCloseHandlers: RpcCloseEventFunction[] = [];
 
-    private config: IRpcWebSocketConfig = {
+    public config: IRpcWebSocketConfig = {
         responseTimeout: 10000
     };
 
