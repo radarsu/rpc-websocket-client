@@ -421,6 +421,9 @@ export class RpcWebSocketClient {
     }
 
     private isRpcError(data: any): data is IRpcError {
+        if (data === null) {
+            return false;
+        }
         return typeof data.code !== 'undefined';
     }
 }
