@@ -17,7 +17,7 @@ describe('WebSocket', () => {
 
         app = mod.createNestApplication();
         app.useWebSocketAdapter(new WsAdapter());
-        await app.listen(testConfig.port);
+        await app.init();
     });
 
     it(`RpcWebSocketClient`, async () => {
