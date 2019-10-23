@@ -106,7 +106,7 @@
         "tslint-config-prettier": "^1.15.0",
         "tslint-config-standard": "^8.0.1",
         "typedoc": "^0.15.0",
-        "typescript": "^3.0.3"
+        "typescript": "^3.7.0-beta"
     },
     "dependencies": {
         "isomorphic-ws": "^4.0.1",
