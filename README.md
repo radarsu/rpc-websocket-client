@@ -38,27 +38,36 @@ import { RpcWebSocketClient } from 'rpc-websocket-client';
 (async () => {
 
     const rpc = new RpcWebSocketClient();
-
     await rpc.connect(`ws://localhost:4000/`);
-    // connection established
+    // Connection is established now.
 
-    // let's hope there will be no error or it will be catched in some wrapper
+    // Let's hope there will be no error or it will be catched in some wrapper.
     await rpc.call(`auth.login`, [`rpcMaster`, `mySecretPassword`]);
 
-    // now lets be pesimistic
-    await rpc.call(`auth.login`, [`rpcMaster`, `mySecretPassword`]).then(() => {
-        // woohoo, user logged!
+    // Now lets be pesimistic.
+    const res = await rpc.call(`auth.login`, [`rpcMaster`, `mySecretPassword`]).then(() => {
+        // Woohoo, user logged!
     }).catch((err) => {
 
-        // err is typeof RpcError (code: number, message: string, data?: any)
+        // Err is typeof RpcError (code: number, message: string, data?: any).
         await rpc.call(`auth.signup`, {
             login: `rpcMaster`,
             password: `mySecretPassword`,
         });
 
+        return false;
     });
 
+    // If catch wrapper returned false, let's not continue.
+    if (res === false) {
+        return;
+    }
+
     rpc.notify(`btw.iHateYou`, [`over and out`]);
+
+    // Close the connection by using native ws.close().
+    rpc.ws.close();
+
 })();
 ```
 
