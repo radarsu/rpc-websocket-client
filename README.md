@@ -14,6 +14,7 @@
 	<a href="https://twitter.com/radarsujs"><img src="https://img.shields.io/twitter/url/https/github.com/radarsu/rpc-websocket-client.svg?style=social" /></a>
 </p>
 
+[!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://www.buymeacoffee.com/radarsu)
 ## Description
 
 I really lacked typescript support or type definitions of <a href="https://github.com/elpheria/rpc-websockets" target="_blank" alt="rpc-websockets">rpc-websockets</a>. I kept everything as simple as possible for <strong>best performance</strong> and in principle <strong>stay close to the metal</strong>. Under the hood id-generation for requests is done using <a href="https://github.com/kelektiv/node-uuid" target="_blank" alt="uuid">uuid/v1</a> to provide id uniqueness as an additional feature.
